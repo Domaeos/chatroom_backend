@@ -1,22 +1,21 @@
-// server filec
-// import express, { Request, Response } from "express";
 import express from "express";
 import { NextFunction, Request, Response } from "express";
 import db from "./Models/index"
-// import { dbConfig } from "./config/db_config"
 import { getRoles } from "./Controllers/Controllers";
 import User from "./Models/user.model"
-import { connect } from "http2";
+import { registerUser } from "./Controllers/Controllers";
+// import { connect } from "http2";
 
 const cors = require("cors");
-const corsOptions = {
-  origin: "http://localhost:8081"
-}
+// const corsOptions = {
+//   origin: "http://localhost:8081"
+// }
 
 const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 async function mongoConnect(): Promise<void> {
   try {
@@ -40,13 +39,12 @@ async function mongoConnect(): Promise<void> {
 }
 
 // function initial(): void {
-  
+
 // }
 
 mongoConnect();
 
 
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -54,6 +52,10 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send({ message: "Hello" });
+});
+
+app.post("/register", (req: Request, res: Response, next: NextFunction) => {
+  registerUser(req, res, next)
 });
 
 app.get("/roles", (req: Request, res: Response, next: NextFunction) => {

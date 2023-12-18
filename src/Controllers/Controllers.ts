@@ -10,3 +10,11 @@ export async function getRoles(req: Request, res: Response) {
         }
     }
 }
+
+export async function registerUser(req: Request, res: Response, next: NextFunction) {
+    try {
+        res.status(200).send({info: "In register controller"})
+    } catch(err) {
+
+    }
+}
