@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { registerUser } from "../Models/models";
 
 export async function getRoles(req: Request, res: Response) {
     try {
@@ -10,10 +11,11 @@ export async function getRoles(req: Request, res: Response) {
     }
 }
 
-export async function registerUser(req: Request, res: Response, next: NextFunction) {
+export async function registerUserController(req: Request, res: Response, next: NextFunction) {
     try {
-        res.status(200).send({info: "In register controller"})
+        const result = await registerUser(req, res, next)
+        res.status(200).send(result)
     } catch(err) {
-
+        next(err);
     }
 }
