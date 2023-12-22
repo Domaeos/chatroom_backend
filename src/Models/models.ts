@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { MongoClient } from "mongodb";
+import { LoginRequest } from "../config/types";
 
 const dotenv = require('dotenv');
 dotenv.config();
